@@ -7,7 +7,7 @@ While abstract, the envisioned use are genomic ranges, where a score, or
 feature or features, span a certain genomic locus.
 
 The underlying data structure is fast and space-efficient thanks to the
-[sortedcontainers]() package.  
+[sortedcontainers](http://www.grantjenks.com/docs/sortedcontainers/introduction.html) package.  
 Memory usage is $\mathcal{O}(n)$ where $n$ is the number of "break points"
 (steps). Insertion and query speed is $\mathcal{O}(\log n)$.  
 
