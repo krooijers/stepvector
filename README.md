@@ -14,7 +14,7 @@ Memory usage is $\mathcal{O}(n)$ where $n$ is the number of "break points"
 In practice this means that e.g. all exons of the human genome can be kept in
 memory easily even on old machines, and fetching overlapping exons in a certain
 interval is basically instant.  
-Generally, speed is competetive with established packages, e.g. `python`'s
+Generally, speed is competitive with established packages, e.g. `python`'s
 `HTseq` and `R`/`BioConductor`'s `GenomicRanges`.
 
 
@@ -24,7 +24,7 @@ Generally, speed is competetive with established packages, e.g. `python`'s
 > Instead, you're probably better off with (py)bedtools or HTSeq
 >
 > This package is/was an impromptu solution to have an efficient data structure
-> for (values and/or sets of features in) genomic ranges, writting in a time
+> for (values and/or sets of features in) genomic ranges, written in a time
 > where HTSeq was python2-only.
 >
 > Things "work", but I can't say it has really been battle-tested, so caveat
