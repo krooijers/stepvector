@@ -49,12 +49,12 @@ class StepVector():
                 if key < self._bounds[0]:
                     raise ValueError("Key out of bounds")
             if self._bounds[1] is not None:
-                if key >= self._bounds[0]:
+                if key >= self._bounds[1]:
                     raise ValueError("Key out of bounds")
 
             if self._t:
                 try:
-                    prevkey = self._floor_key(key)
+                    prevkey = self._floor_key(key, bisect="right")
                     return self._t[prevkey]
                 except KeyError:
                     # no item smaller than or equal to key
@@ -111,7 +111,7 @@ class StepVector():
             a = self._t.bisect_left(start)
             b = self._t.bisect(end)
             assert a <= b
-            del self._t.iloc[a:b]
+            del self._t.keys()[a:b]
 
         # set an end marker if necessary
         if nkey is None:
@@ -129,11 +129,11 @@ class StepVector():
         if not self._t:
             # empty tree
             if start is None or end is None:
-                raise StopIteration  # FIXME: can't figure out a better thing to do if only one is None
+                return  # FIXME: can't figure out a better thing to do if only one is None
             else:
                 if start < end:
                     yield (start, end, self.datatype())
-                raise StopIteration
+                return
 
         if start is None:
             a = 0
@@ -155,7 +155,7 @@ class StepVector():
             if start < end:
                 yield (start, end, self.datatype())
 
-            raise StopIteration
+            return
 
         it = self._t.islice(a, b)
 
@@ -211,4 +211,4 @@ class StepVector():
         if p == 0:
             raise KeyError
         else:
-            return self._t.iloc[p - 1]
+            return self._t.keys()[p - 1]

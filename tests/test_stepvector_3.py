@@ -1,5 +1,8 @@
-from stepvector import StepVector
 from itertools import permutations
+
+import pytest
+
+from stepvector import StepVector
 
 
 
@@ -42,13 +45,8 @@ RES3 = [
 ]
 
 
-def test_intervals_add_value():
-    yield do_intervals_add_value, INTERVALS1, RES1
-    yield do_intervals_add_value, INTERVALS2, RES2
-    yield do_intervals_add_value, INTERVALS3, RES3
-
-
-def do_intervals_add_value(ivs, output):
+@pytest.mark.parametrize("ivs, output", zip(*[[INTERVALS1, INTERVALS2, INTERVALS3], [RES1, RES2, RES3]]))
+def test_intervals_add_value(ivs, output):
     sv = StepVector(set)
     for start, end, val in ivs:
         sv.add_value(start, end, val)
@@ -57,13 +55,8 @@ def do_intervals_add_value(ivs, output):
     assert res == output
 
 
-def test_independence_of_order():
-    yield do_independence_of_order, INTERVALS1, RES1
-    yield do_independence_of_order, INTERVALS2, RES2
-    yield do_independence_of_order, INTERVALS3, RES3
-
-
-def do_independence_of_order(ivs, output):
+@pytest.mark.parametrize("ivs, output", zip(*[[INTERVALS1, INTERVALS2, INTERVALS3], [RES1, RES2, RES3]]))
+def test_independence_of_order(ivs, output):
     l = len(ivs)
     for order in permutations(range(l), l):
         sv = StepVector(set)
